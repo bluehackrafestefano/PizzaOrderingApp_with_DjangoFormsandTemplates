@@ -1,0 +1,36 @@
+{% extends "pizza/base.html" %}
+
+
+{% block body %}
+
+<div class="container">
+
+    <h1>Order Page</h1>
+
+    <!-- {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %} -->
+
+    <div>
+
+        {% load crispy_forms_tags %}
+
+        <form action="{% url 'order' %}" method="POST">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <input type="submit" value="Order">
+            
+            
+            {% if pizza_pk %}
+                <button><a href="{% url 'edit' pizza_pk %}">Edit Order</a></button>
+            {% endif %}
+                
+
+        </form>
+    </div>
+</div>
+  
+{% endblock body %}
+

@@ -1,0 +1,30 @@
+{% extends "pizza/base.html" %}
+
+
+{% block body %}
+
+<div class="container">
+
+    <h1>Edit Order</h1>
+
+    <!-- {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %} -->
+
+    <div>
+        {% load crispy_forms_tags %}
+
+        <form action="" method="post">
+            
+            {% csrf_token %}
+            {{ form | crispy }}
+            
+            <input type="submit" value="Edit">
+            
+        </form>
+    </div>
+        
+</div>
+{% endblock body %}
