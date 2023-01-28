@@ -1,15 +1,8 @@
-# Session-27
- ## Topic:  Pizza App
- 
-  - Learning Outcomes:
+# Introduction
 
-    - Understanding basic Django forms and templates
-    - Learning and appying front end of a web page
-    - Implementing Django Template Language
+In this session, we will create a Django app named "Nadia's Garden" which will let users to order pizza. 
 
-  - Topics to be Covered:
-
-    - 
+Most websites require the use of forms to receive data from users, so it is crucial to know how to safely collect and handle data while maintaining a user-friendly experience on your website. In this course, learn how to use Django to create forms.
 
 
     
