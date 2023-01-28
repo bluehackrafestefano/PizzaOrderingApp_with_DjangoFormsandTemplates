@@ -8,4 +8,22 @@ class PizzaForm(forms.ModelForm):
 
     class Meta:
         model = Pizza
-        fields = ('size', 'topping')
+        fields = (
+            'size',
+            'topping',
+            'customer_name',
+            'phone_number',
+            'address',
+            )
+
+
+# class OrderForm(forms.ModelForm):
+    
+#     class Meta:
+#         model = Order
+#         fields = (
+#             'customer_name',
+#             'phone_number',
+#             'address',
+#             'price',
+#         )
