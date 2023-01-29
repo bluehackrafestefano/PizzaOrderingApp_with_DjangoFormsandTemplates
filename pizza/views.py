@@ -2,7 +2,7 @@ import decimal
 from django.shortcuts import render
 from .forms import PizzaForm
 from django.contrib import messages
-from .models import Pizza
+from .models import Pizza, Size, Topping
 
 
 def home(request):
@@ -18,28 +18,25 @@ def order(request):
             print('inside valid')
             size = form.cleaned_data.get('size')
             print(size)
-            pizza_size_price = 4
-            if size == 'Medium':
-                pizza_size_price = 5.5
-            elif size == 'Large':
-                pizza_size_price = 7
+            size_price = Size.objects.get(name=size).size_price
 
             topping_list = form.cleaned_data.get('topping')
             print(topping_list)
             topping_prices = 0
             for topping in topping_list:
                 print(topping.topping_price)
-                print(topping_prices)
-                topping_prices += topping.topping_price
+                topping_price = Topping.objects.get(name=topping).topping_price
+                topping_prices += topping_price
 
+            pizza_price = size_price + topping_prices
             
-            print(pizza.pizza_price)
-            pizza.pizza_price = pizza_size_price + float(topping_prices)
-
+            pizza.pizza_price = pizza_price
             pizza.save()
 
             pizza_pk = pizza.id
-            messages.success(request, 'Your order is on the way!')
+
+            name = form.cleaned_data.get('customer_name')
+            messages.success(request, f'Thank you {name}, your order is on the way! You will pay ${pizza_price}.')
             form = PizzaForm()
         else:
             messages.warning(request, 'Something wrong!')

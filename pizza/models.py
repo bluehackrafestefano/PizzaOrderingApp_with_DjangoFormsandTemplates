@@ -4,13 +4,14 @@ from django.contrib.auth.models import User
 
 class Size(models.Model):
     name = models.CharField(max_length=6)
+    size_price = models.DecimalField(max_digits=4, decimal_places=2)
     def __str__(self):
         return self.name
 
 
 class Topping(models.Model):
     name =  models.CharField(max_length=10)
-    topping_price = models.DecimalField(max_digits=5, decimal_places=2)
+    topping_price = models.DecimalField(max_digits=4, decimal_places=2)
     def __str__(self):
         return self.name
 
@@ -23,7 +24,7 @@ class Pizza(models.Model):
     address = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now=True)
     completed = models.BooleanField(default=False)
-    pizza_price = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    pizza_price = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
 
     def __str__(self):
         toppings = ', '.join(str(v) for v in self.topping.all())
