@@ -32,7 +32,7 @@ def order(request):
             pizza_pk = pizza.id
 
             name = form.cleaned_data.get('customer_name')
-            messages.success(request, f'Thank you {name.capitalize()}, your order is on the way! You will pay ${pizza_price}.')
+            messages.success(request, f'Thank you {name.title()}, your order is on the way! You will pay ${pizza_price}.')
             form = PizzaForm()
         else:
             messages.warning(request, 'Something wrong!')
