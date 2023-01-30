@@ -8,6 +8,27 @@ from .models import Pizza, Size, Topping
 def home(request):
     return render(request, 'pizza/home.html')
 
+# def calculate_price(form):
+#     pizza = form.save(commit=False)
+#     print('inside valid')
+#     size = form.cleaned_data.get('size')
+#     print(size)
+#     size_price = Size.objects.get(name=size).size_price
+
+#     topping_list = form.cleaned_data.get('topping')
+#     print(topping_list)
+#     topping_prices = 0
+#     for topping in topping_list:
+#         print(topping.topping_price)
+#         topping_price = Topping.objects.get(name=topping).topping_price
+#         topping_prices += topping_price
+
+#     pizza_price = size_price + topping_prices
+
+#     pizza.pizza_price = pizza_price
+#     pizza.save()
+    
+#     return pizza
 
 def order(request):
     form = PizzaForm()
@@ -15,16 +36,13 @@ def order(request):
         form = PizzaForm(request.POST)
         if form.is_valid():
             pizza = form.save(commit=False)
-            print('inside valid')
+
             size = form.cleaned_data.get('size')
-            print(size)
             size_price = Size.objects.get(name=size).size_price
 
             topping_list = form.cleaned_data.get('topping')
-            print(topping_list)
             topping_prices = 0
             for topping in topping_list:
-                print(topping.topping_price)
                 topping_price = Topping.objects.get(name=topping).topping_price
                 topping_prices += topping_price
 
@@ -32,7 +50,7 @@ def order(request):
             
             pizza.pizza_price = pizza_price
             pizza.save()
-
+            
             pizza_pk = pizza.id
 
             name = form.cleaned_data.get('customer_name')
@@ -59,6 +77,7 @@ def edit_order(request, id):
         form = PizzaForm(request.POST, instance=pizza)
         if form.is_valid():
             form.save()
+
             messages.success(request, 'Editted the pizza!')
         else:
             messages.warning(request, 'Something wrong!')
