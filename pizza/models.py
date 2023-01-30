@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from email_signals.models import EmailSignalMixin
 
 
 class Size(models.Model):
@@ -16,7 +17,7 @@ class Topping(models.Model):
         return self.name
 
 
-class Pizza(models.Model):
+class Pizza(models.Model, EmailSignalMixin):
     size = models.ForeignKey(Size, on_delete=models.CASCADE)
     topping = models.ManyToManyField(Topping)
     customer_name = models.CharField(max_length=100)
@@ -29,3 +30,11 @@ class Pizza(models.Model):
     def __str__(self):
         toppings = ', '.join(str(v) for v in self.topping.all())
         return f'{self.size.name} - {toppings} - {self.customer_name} - {self.address} - {self.pizza_price}'
+
+    # def customer_emails(self):
+    #     """Recipient is the customer."""
+    #     return [self.email]
+    
+    def management_mailing_list(self):
+        """Recipient list includes management."""
+        return ['rafe@clarusway.com']

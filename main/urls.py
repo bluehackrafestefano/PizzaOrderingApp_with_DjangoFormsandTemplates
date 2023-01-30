@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pizza.urls')),
     path('user/', include('users.urls')),
+    path('email-signals/', include('email_signals.urls')),
 ]
