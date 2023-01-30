@@ -1,5 +1,11 @@
 <h1>login page</h1>
 
+
+{% for message in messages %}
+    {{ message }}
+{% endfor %}
+    
+
 <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
